@@ -15,7 +15,12 @@ class QuizBloc {
   void loadQuizData() {
     _quizStreamController.sink.add(QuizState._quizLoading());
     _quizRepository.getQuiz().then((quiz) {
-      _quizStreamController.sink.add(QuizState._quizData());
+      _quizStreamController.sink.add(QuizState._quizData(
+        Quiz(
+          operator: "plus",
+          operand: 5
+        )
+      ));
     });
   }
 
