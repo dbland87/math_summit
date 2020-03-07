@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:math_ninja/keypad/KeypadWidget.dart';
+import 'package:math_ninja/ui/keypad/KeypadWidget.dart';
 
 void main() => runApp(MyApp());
 
