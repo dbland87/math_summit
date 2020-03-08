@@ -19,6 +19,7 @@ class _QuizScreenState extends State<QuizScreen> {
   @override
   void initState() {
     _quizBloc = QuizBloc(widget._repository);
+    _quizBloc.loadQuizData();
     super.initState();
   }
 
@@ -26,7 +27,7 @@ class _QuizScreenState extends State<QuizScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Quiz Page'),
+        title: const Text('Quiz Screen'),
       ),
       body: SafeArea(
         child: StreamBuilder<QuizState>(
@@ -35,7 +36,7 @@ class _QuizScreenState extends State<QuizScreen> {
           builder: (context, snapshot) {
              if (snapshot.data is QuizLoadingState) {
               return _buildLoading();
-            } else if (snapshot.data is QuizLoadingState) {
+            } else if (snapshot.data is QuizDataState) {
               QuizDataState state = snapshot.data;
               return _buildContent(state.quiz);
             } else {
@@ -61,7 +62,13 @@ class _QuizScreenState extends State<QuizScreen> {
 
   Widget _buildContent(Quiz quiz) {
     return Center(
-      child: Text('Operand: ${quiz.operand} Operator: ${quiz.operator}'),
+      child: Column(
+        children: <Widget>[
+          Text('Operand: ${quiz.operand}'),
+          Text('Operator: ${quiz.operator}'),
+        ],
+      )
+
     );
   }
 

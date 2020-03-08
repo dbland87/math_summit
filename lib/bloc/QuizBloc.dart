@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:math_ninja/constants/OperatorEnum.dart';
 import 'package:math_ninja/data/Quiz.dart';
 import 'package:math_ninja/data/QuizRepository.dart';
 
@@ -17,7 +18,7 @@ class QuizBloc {
     _quizRepository.getQuiz().then((quiz) {
       _quizStreamController.sink.add(QuizState._quizData(
         Quiz(
-          operator: "plus",
+          operator: OperatorEnum.MULTIPLY,
           operand: 5
         )
       ));
