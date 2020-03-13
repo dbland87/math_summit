@@ -30,20 +30,24 @@ class _QuizScreenState extends State<QuizScreen> {
         title: const Text('Quiz Screen'),
       ),
       body: SafeArea(
-        child: StreamBuilder<QuizState>(
-          stream: _quizBloc.quiz,
-          initialData: QuizInitState(),
-          builder: (context, snapshot) {
-             if (snapshot.data is QuizLoadingState) {
-              return _buildLoading();
-            } else if (snapshot.data is QuizDataState) {
-              QuizDataState state = snapshot.data;
-              return _buildContent(state.quiz);
-            } else {
-               return _buildError();
-            }
-          }
-        ),
+        child: Column(
+          children: <Widget>[
+            StreamBuilder<QuizState>(
+                stream: _quizBloc.quiz,
+                initialData: QuizInitState(),
+                builder: (context, snapshot) {
+                  if (snapshot.data is QuizLoadingState) {
+                    return _buildLoading();
+                  } else if (snapshot.data is QuizDataState) {
+                    QuizDataState state = snapshot.data;
+                    return _buildContent(state.quiz);
+                  } else {
+                    return _buildError();
+                  }
+                }
+            ),
+          ],
+        )
       ),
     );
   }

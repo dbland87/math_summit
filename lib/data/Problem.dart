@@ -1,33 +1,34 @@
+import 'package:flutter/material.dart';
 import 'package:math_ninja/constants/OperatorEnum.dart';
 
 class Problem {
-  int _first;
-  int _second;
-  OperatorEnum _operator;
+
+  final int first;
+  final int second;
+  final OperatorEnum operator;
   int _response = -1;
 
-  Problem(int first, int second, OperatorEnum operator) {
-    this._first = first;
-    this._second = second;
-    this._operator = operator;
-  }
+  Problem({@required this.first, @required this.second, @required this.operator}):
+        assert (first != null),
+        assert(second != null),
+        assert(operator != null);
 
   int answer() {
-    switch (_operator) {
+    switch (operator) {
       case OperatorEnum.MULTIPLY:
-        return _first * _second;
+        return this.first * second;
         break;
       case OperatorEnum.DIVIDE:
-        return _first ~/ _second;
+        return first ~/ second;
         break;
       case OperatorEnum.ADD:
-        return _first + _second;
+        return first + second;
         break;
       case OperatorEnum.SUBTRACT:
-        return _first - _second;
+        return first - second;
         break;
     }
-    throw new Exception("Error computing answer for: $_first $_second $_operator");
+    throw new Exception("Error computing answer for: $first $second $operator");
   }
 
   bool isCorrect() {
