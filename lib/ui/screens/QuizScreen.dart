@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:math_ninja/bloc/QuizBloc.dart';
 import 'package:math_ninja/data/Quiz.dart';
 import 'package:math_ninja/data/QuizRepository.dart';
+import 'package:math_ninja/ui/Problem/ProblemWidget.dart';
+import 'package:math_ninja/ui/keypad/KeypadWidget.dart';
 
 class QuizScreen extends StatefulWidget {
   QuizScreen(this._repository);
+
   final QuizRepository _repository;
 
   @override
@@ -14,7 +17,6 @@ class QuizScreen extends StatefulWidget {
 
 class _QuizScreenState extends State<QuizScreen> {
   QuizBloc _quizBloc;
-
 
   @override
   void initState() {
@@ -30,25 +32,13 @@ class _QuizScreenState extends State<QuizScreen> {
         title: const Text('Quiz Screen'),
       ),
       body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            StreamBuilder<QuizState>(
-                stream: _quizBloc.quiz,
-                initialData: QuizInitState(),
-                builder: (context, snapshot) {
-                  if (snapshot.data is QuizLoadingState) {
-                    return _buildLoading();
-                  } else if (snapshot.data is QuizDataState) {
-                    QuizDataState state = snapshot.data;
-                    return _buildContent(state.quiz);
-                  } else {
-                    return _buildError();
-                  }
-                }
-            ),
-          ],
-        )
-      ),
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          ProblemWidget(stream: _quizBloc.quiz),
+          KeypadWidget(),
+        ],
+      )),
     );
   }
 
@@ -56,29 +46,5 @@ class _QuizScreenState extends State<QuizScreen> {
   void dispose() {
     _quizBloc.dispose();
     super.dispose();
-  }
-
-  Widget _buildLoading() {
-    return const Center(
-      child: CircularProgressIndicator(),
-    );
-  }
-
-  Widget _buildContent(Quiz quiz) {
-    return Center(
-      child: Column(
-        children: <Widget>[
-          Text('Operand: ${quiz.operand}'),
-          Text('Operator: ${quiz.operator}'),
-        ],
-      )
-
-    );
-  }
-
-  Widget _buildError() {
-    return Center(
-      child: Text('Wat.'),
-    );
   }
 }
