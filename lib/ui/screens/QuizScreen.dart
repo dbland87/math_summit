@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:math_ninja/bloc/QuizBloc.dart';
-import 'package:math_ninja/data/Quiz.dart';
 import 'package:math_ninja/data/QuizRepository.dart';
 import 'package:math_ninja/ui/Problem/ProblemWidget.dart';
 import 'package:math_ninja/ui/keypad/KeypadWidget.dart';

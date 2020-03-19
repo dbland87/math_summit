@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:math_ninja/constants/OperatorEnum.dart';
-import 'package:math_ninja/data/Problem.dart';
 import 'package:math_ninja/data/Quiz.dart';
 import 'package:math_ninja/data/QuizRepository.dart';
 
@@ -29,7 +27,7 @@ class QuizBloc {
 class QuizState {
   QuizState();
   factory QuizState._quizLoading() = QuizLoadingState;
-  factory QuizState._quizData(Quiz quiz) = QuizDataState;
+  factory QuizState._quizData(Quiz quiz, [int input]) = QuizDataState;
 }
 
 class QuizInitState extends QuizState {}
@@ -37,6 +35,7 @@ class QuizInitState extends QuizState {}
 class QuizLoadingState extends QuizState {}
 
 class QuizDataState extends QuizState {
-  QuizDataState(this.quiz);
+  QuizDataState(this.quiz, [this.input]);
   final Quiz quiz;
+  final int input;
 }
