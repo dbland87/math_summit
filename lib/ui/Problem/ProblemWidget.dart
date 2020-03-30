@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:math_ninja/bloc/QuizBloc.dart';
 import 'package:math_ninja/data/Quiz.dart';
+import 'package:math_ninja/providers/BlockProvider.dart';
 
 class ProblemWidget extends StatelessWidget {
-  final Stream<QuizState> stream;
-
-  ProblemWidget({@required this.stream}) : assert(stream != null);
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
         child: Container(
       child: StreamBuilder<QuizState>(
-          stream: stream,
+          stream: BlocProvider.of<QuizBloc>(context).quizStream,
           initialData: QuizInitState(),
           builder: (context, snapshot) {
             if (snapshot.data is QuizLoadingState) {
@@ -33,7 +31,7 @@ class ProblemWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildContent(Quiz quiz, int input) {
+  Widget _buildContent(Quiz quiz, String input) {
     return Center(
         child: Column(
       mainAxisAlignment: MainAxisAlignment.center,

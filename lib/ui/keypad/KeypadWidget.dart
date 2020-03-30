@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:math_ninja/bloc/QuizBloc.dart';
+import 'package:math_ninja/providers/BlockProvider.dart';
 
 import 'NumKey.dart';
 
-class NumKeypadWidget extends StatelessWidget {
+class KeypadWidget extends StatelessWidget {
 
-  final Function(int) onNumKeyPressed;
+  final QuizBloc bloc;
 
-  NumKeypadWidget({@required this.onNumKeyPressed})
+  KeypadWidget({@required this.bloc});
 
   @override
   Widget build(BuildContext context) {
@@ -15,52 +17,52 @@ class NumKeypadWidget extends StatelessWidget {
         Row(
           children: <Widget>[
             Expanded(
-              child: NumKey(displayValue: "1", onKeyClicked: () => _publishValue),
+              child: NumKey(displayValue: "1", callback: publishValue),
             ),
             Expanded(
-              child: NumKey(displayValue: "2", onKeyClicked: _publishValue),
+              child: NumKey(displayValue: "2", callback: publishValue),
             ),
             Expanded(
-              child: NumKey(displayValue: "3", onKeyClicked: _publishValue),
-            ),
-          ],
-        ),
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: NumKey(displayValue: "4", onKeyClicked: _publishValue),
-            ),
-            Expanded(
-              child: NumKey(displayValue: "5", onKeyClicked: _publishValue),
-            ),
-            Expanded(
-              child: NumKey(displayValue: "6", onKeyClicked: _publishValue),
+              child: NumKey(displayValue: "3", callback: publishValue),
             ),
           ],
         ),
         Row(
           children: <Widget>[
             Expanded(
-              child: NumKey(displayValue: "7", onKeyClicked: _publishValue),
+              child: NumKey(displayValue: "4", callback: publishValue),
             ),
             Expanded(
-              child: NumKey(displayValue: "8", onKeyClicked: _publishValue),
+              child: NumKey(displayValue: "5", callback: publishValue),
             ),
             Expanded(
-              child: NumKey(displayValue: "9", onKeyClicked: _publishValue),
+              child: NumKey(displayValue: "6", callback: publishValue),
             ),
           ],
         ),
         Row(
           children: <Widget>[
             Expanded(
-              child: NumKey(displayValue: "", onKeyClicked: _publishValue),
+              child: NumKey(displayValue: "7", callback: publishValue),
             ),
             Expanded(
-              child: NumKey(displayValue: "0", onKeyClicked: _publishValue),
+              child: NumKey(displayValue: "8", callback: publishValue),
             ),
             Expanded(
-              child: NumKey(displayValue: "⌫", onKeyClicked: _publishValue),
+              child: NumKey(displayValue: "9", callback: publishValue),
+            ),
+          ],
+        ),
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: NumKey(displayValue: "", callback: publishValue),
+            ),
+            Expanded(
+              child: NumKey(displayValue: "0", callback: publishValue),
+            ),
+            Expanded(
+              child: NumKey(displayValue: "⌫", callback: publishValue),
             ),
           ],
         ),
@@ -68,31 +70,14 @@ class NumKeypadWidget extends StatelessWidget {
     );
   }
 
-  void _publishValue({@required String value}) {
-    switch(value) {
+  void publishValue(String value) {
+    switch (value) {
       case "⌫":
+        bloc.removeLastCharacter();
         break;
-      case "0":
-        break;
-      case "1":
-        break;
-      case "2":
-        break;
-      case "3":
-        break;
-      case "4":
-        break;
-      case "5":
-        break;
-      case "6":
-        break;
-      case "7":
-        break;
-      case "8":
-        break;
-      case "9":
+      default:
+        bloc.appendCharacter(value);
         break;
     }
-
   }
 }
