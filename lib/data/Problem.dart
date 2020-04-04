@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:math_ninja/constants/OperatorEnum.dart';
+import 'file:///C:/Users/COMMAND_CENTER/AndroidStudioProjects/math_ninja/lib/enums/OperatorEnum.dart';
 
 class Problem {
 
   final int first;
   final int second;
-  final OperatorEnum operator;
+  final Operators operator;
   int _response = -1;
 
   Problem({@required this.first, @required this.second, @required this.operator}):
@@ -15,16 +15,16 @@ class Problem {
 
   int answer() {
     switch (operator) {
-      case OperatorEnum.MULTIPLY:
+      case Operators.MULTIPLY:
         return this.first * second;
         break;
-      case OperatorEnum.DIVIDE:
+      case Operators.DIVIDE:
         return first ~/ second;
         break;
-      case OperatorEnum.ADD:
+      case Operators.ADD:
         return first + second;
         break;
-      case OperatorEnum.SUBTRACT:
+      case Operators.SUBTRACT:
         return first - second;
         break;
     }

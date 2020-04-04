@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:math_ninja/base/Bloc.dart';
+import 'package:math_ninja/constants/QuizConstants.dart';
 import 'package:math_ninja/data/Quiz.dart';
 import 'package:math_ninja/data/QuizRepository.dart';
+import 'package:math_ninja/extensions/StringExtensions.dart';
 
 class QuizBloc implements Bloc {
   QuizBloc(this._quizRepository);
@@ -44,10 +46,11 @@ class QuizBloc implements Bloc {
   }
 
   void appendCharacter(String character) {
-    _currentInput = _currentInput + character;
-    _quizStreamController.sink.add(QuizState._quizData(_quiz, _currentInput));
+    if ((_currentInput + character).isValidAnswerInput()) {
+      _currentInput = _currentInput + character;
+      _quizStreamController.sink.add(QuizState._quizData(_quiz, _currentInput));
+    }
   }
-
 }
 
 class QuizState {

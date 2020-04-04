@@ -1,0 +1,2 @@
+
+const MAX_ANSWER_LENGTH = 3;

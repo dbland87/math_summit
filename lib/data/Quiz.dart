@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:math_ninja/constants/OperatorEnum.dart';
+import 'file:///C:/Users/COMMAND_CENTER/AndroidStudioProjects/math_ninja/lib/enums/OperatorEnum.dart';
 import 'Problem.dart';
 
 class Quiz {
 
   final int operand;
-  final OperatorEnum operator;
+  final Operators operator;
   final List<Problem> problems;
 
   Quiz({@required this.operand, @required this.operator, @required this.problems}):

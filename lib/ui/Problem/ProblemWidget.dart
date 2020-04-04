@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:math_ninja/bloc/QuizBloc.dart';
 import 'package:math_ninja/data/Quiz.dart';
 import 'package:math_ninja/providers/BlockProvider.dart';
+import 'package:math_ninja/extensions/OperatorsExtensions.dart';
+import 'package:math_ninja/ui/Problem/ProblemCharacter.dart';
 
 class ProblemWidget extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -13,9 +14,7 @@ class ProblemWidget extends StatelessWidget {
           stream: BlocProvider.of<QuizBloc>(context).quizStream,
           initialData: QuizInitState(),
           builder: (context, snapshot) {
-            if (snapshot.data is QuizLoadingState) {
-              return _buildLoading();
-            } else if (snapshot.data is QuizDataState) {
+            if (snapshot.data is QuizDataState) {
               QuizDataState state = snapshot.data;
               return _buildContent(state.quiz, state.input);
             } else {
@@ -25,22 +24,29 @@ class ProblemWidget extends StatelessWidget {
     ));
   }
 
-  Widget _buildLoading() {
-    return const Center(
-      child: CircularProgressIndicator(),
-    );
-  }
-
   Widget _buildContent(Quiz quiz, String input) {
-    return Center(
-        child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        Text('Operand: ${quiz.operand}'),
-        Text('Operator: ${quiz.operator}'),
-        Text('Answer: $input')
+        Expanded(
+          flex: 3,
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                ProblemCharacter(character: quiz.operand.toString()),
+                ProblemCharacter(character: quiz.operator.displaySymbol),
+                ProblemCharacter(character: quiz.operand.toString()),
+                ProblemCharacter(character: '='),
+              ]),
+        ),
+        Expanded(
+          flex: 1,
+          child: Center(
+            child: ProblemCharacter(character: input.toString()),
+          ),
+        )
       ],
-    ));
+    );
   }
 
   Widget _buildError() {
