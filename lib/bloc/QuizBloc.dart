@@ -11,21 +11,21 @@ class QuizBloc implements Bloc {
 
   final QuizRepository _quizRepository;
 
-  final _quizStreamController = StreamController<QuizState>();
+  final _problemStreamController = StreamController<ProblemState>();
   final _inputStreamController = StreamController<int>();
 
-  Stream<QuizState> get quizStream => _quizStreamController.stream;
+  Stream<ProblemState> get problemStream => _problemStreamController.stream;
   Stream<int> get inputStream => _inputStreamController.stream;
 
   Quiz _quiz;
   String _currentInput = "";
 
   void loadQuizData() {
-    _quizStreamController.sink.add(QuizState._quizLoading());
+    _problemStreamController.sink.add(ProblemState._quizLoading());
     _quizRepository.getQuiz().then((quiz) {
       //TODO
       this._quiz = quiz;
-      _quizStreamController.sink.add(QuizState._quizData(quiz));
+      _problemStreamController.sink.add(ProblemState._problemData(quiz));
     });
   }
 
@@ -35,36 +35,63 @@ class QuizBloc implements Bloc {
 
   @override
   void dispose() {
-    _quizStreamController.close();
+    _problemStreamController.close();
     _inputStreamController.close();
+  }
+
+  void nextProblem() {}
+
+  void onNewInputValue(String value) {
+    switch (value) {
+      case "⌫":
+        removeLastCharacter();
+        break;
+      case "Next":
+        nextProblem();
+        break;
+      default:
+        appendCharacter(value);
+        break;
+    }
   }
 
   void removeLastCharacter() {
     if (_currentInput.length == 0) return;
     _currentInput = _currentInput.substring(0, _currentInput.length - 1);
-    _quizStreamController.sink.add(QuizState._quizData(_quiz, _currentInput));
+    _problemStreamController.sink.add(ProblemState._problemData(_quiz, _currentInput));
   }
 
   void appendCharacter(String character) {
-    if ((_currentInput + character).isValidAnswerInput()) {
-      _currentInput = _currentInput + character;
-      _quizStreamController.sink.add(QuizState._quizData(_quiz, _currentInput));
-    }
+    if (!(_currentInput + character).isValidAnswerInput()) return;
+    _currentInput = _currentInput + character;
+    _problemStreamController.sink.add(ProblemState._problemData(_quiz, _currentInput));
+  }
+
+  void onNewAnswerInput(int newAnswer) {
+
+  }
+
+  onNextClicked() {
+
   }
 }
 
-class QuizState {
-  QuizState();
-  factory QuizState._quizLoading() = QuizLoadingState;
-  factory QuizState._quizData(Quiz quiz, [String input]) = QuizDataState;
+class ProblemState {
+  //TODO this needs to send only problem data
+  //TODO need a separate stream for input
+  ProblemState();
+  factory ProblemState._quizLoading() = ProblemLoadingState;
+  factory ProblemState._problemData(Quiz quiz, [String input, int answer]) =
+      ProblemDataState;
 }
 
-class QuizInitState extends QuizState {}
+class ProblemInitState extends ProblemState {}
 
-class QuizLoadingState extends QuizState {}
+class ProblemLoadingState extends ProblemState {}
 
-class QuizDataState extends QuizState {
-  QuizDataState(this.quiz, [this.input]);
+class ProblemDataState extends ProblemState {
+  ProblemDataState(this.quiz, [this.input, this.answer]);
   final Quiz quiz;
   final String input;
+  final int answer;
 }

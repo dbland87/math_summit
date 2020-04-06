@@ -10,12 +10,12 @@ class ProblemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
         child: Container(
-      child: StreamBuilder<QuizState>(
-          stream: BlocProvider.of<QuizBloc>(context).quizStream,
-          initialData: QuizInitState(),
+      child: StreamBuilder<ProblemState>(
+          stream: BlocProvider.of<QuizBloc>(context).problemStream,
+          initialData: ProblemInitState(),
           builder: (context, snapshot) {
-            if (snapshot.data is QuizDataState) {
-              QuizDataState state = snapshot.data;
+            if (snapshot.data is ProblemDataState) {
+              ProblemDataState state = snapshot.data;
               return _buildContent(state.quiz, state.input);
             } else {
               return _buildError();
@@ -42,7 +42,9 @@ class ProblemWidget extends StatelessWidget {
         Expanded(
           flex: 1,
           child: Center(
-            child: ProblemCharacter(character: input.toString()),
+            child: ProblemCharacter(
+                character: (input != null) ? input.toString() : ""
+            ),
           ),
         )
       ],

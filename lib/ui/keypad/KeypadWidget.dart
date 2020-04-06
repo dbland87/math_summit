@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:math_ninja/bloc/QuizBloc.dart';
 import 'package:math_ninja/providers/BlockProvider.dart';
+import 'package:math_ninja/extensions/StringExtensions.dart';
 
 import 'NumKey.dart';
 
 class KeypadWidget extends StatelessWidget {
 
   final QuizBloc bloc;
+  String _currentInputValue = null;
 
   KeypadWidget({@required this.bloc});
 
@@ -17,52 +19,52 @@ class KeypadWidget extends StatelessWidget {
         Row(
           children: <Widget>[
             Expanded(
-              child: NumKey(displayValue: "1", callback: publishValue),
+              child: NumKey(displayValue: "1", callback: onNewValue),
             ),
             Expanded(
-              child: NumKey(displayValue: "2", callback: publishValue),
+              child: NumKey(displayValue: "2", callback: onNewValue),
             ),
             Expanded(
-              child: NumKey(displayValue: "3", callback: publishValue),
-            ),
-          ],
-        ),
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: NumKey(displayValue: "4", callback: publishValue),
-            ),
-            Expanded(
-              child: NumKey(displayValue: "5", callback: publishValue),
-            ),
-            Expanded(
-              child: NumKey(displayValue: "6", callback: publishValue),
+              child: NumKey(displayValue: "3", callback: onNewValue),
             ),
           ],
         ),
         Row(
           children: <Widget>[
             Expanded(
-              child: NumKey(displayValue: "7", callback: publishValue),
+              child: NumKey(displayValue: "4", callback: onNewValue),
             ),
             Expanded(
-              child: NumKey(displayValue: "8", callback: publishValue),
+              child: NumKey(displayValue: "5", callback: onNewValue),
             ),
             Expanded(
-              child: NumKey(displayValue: "9", callback: publishValue),
+              child: NumKey(displayValue: "6", callback: onNewValue),
             ),
           ],
         ),
         Row(
           children: <Widget>[
             Expanded(
-              child: NumKey(displayValue: "", callback: publishValue),
+              child: NumKey(displayValue: "7", callback: onNewValue),
             ),
             Expanded(
-              child: NumKey(displayValue: "0", callback: publishValue),
+              child: NumKey(displayValue: "8", callback: onNewValue),
             ),
             Expanded(
-              child: NumKey(displayValue: "⌫", callback: publishValue),
+              child: NumKey(displayValue: "9", callback: onNewValue),
+            ),
+          ],
+        ),
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: NumKey(displayValue: "Next", callback: onNextClicked),
+            ),
+            Expanded(
+              child: NumKey(displayValue: "0", callback: onNewValue),
+            ),
+            Expanded(
+              child: NumKey(displayValue: "⌫", callback: onNewValue),
             ),
           ],
         ),
@@ -70,14 +72,22 @@ class KeypadWidget extends StatelessWidget {
     );
   }
 
-  void publishValue(String value) {
+  void onNewValue(String value) {
     switch (value) {
       case "⌫":
-        bloc.removeLastCharacter();
+        if (_currentInputValue.length == 0) return;
+        _currentInputValue = _currentInputValue.substring(0, _currentInputValue.length - 1);
         break;
       default:
-        bloc.appendCharacter(value);
+        if (!(_currentInputValue + value).isValidAnswerInput()) return;
+        _currentInputValue =  _currentInputValue + value;
         break;
     }
+    final int newAnswer = _currentInputValue as int;
+    bloc.onNewAnswerInput(newAnswer);
+  }
+
+  void onNextClicked(String value) {
+    bloc.onNextClicked();
   }
 }
