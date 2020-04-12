@@ -3,12 +3,13 @@ import 'file:///C:/Users/COMMAND_CENTER/AndroidStudioProjects/math_ninja/lib/enu
 
 class Problem {
 
+  final String id;
   final int first;
   final int second;
   final Operators operator;
   int _response = null;
 
-  Problem({@required this.first, @required this.second, @required this.operator}):
+  Problem({@required this.id, @required this.first, @required this.second, @required this.operator}):
         assert (first != null),
         assert(second != null),
         assert(operator != null);

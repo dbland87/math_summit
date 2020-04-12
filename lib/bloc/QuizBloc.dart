@@ -6,9 +6,8 @@ import 'package:math_ninja/data/Quiz.dart';
 import 'package:math_ninja/data/QuizRepository.dart';
 
 class QuizBloc implements Bloc {
-  QuizBloc(this._quizRepository) {
-    loadQuizData();
-  }
+
+  QuizBloc(this._quizRepository);
 
   final QuizRepository _quizRepository;
 
@@ -57,6 +56,12 @@ class QuizBloc implements Bloc {
     _currentProblem = _quiz.nextUnfinishedProblem();
     _quizStreamController.sink.add(QuizState._quizData(_currentProblem));
   }
+
+  void onProblemClicked(String id) {
+    _quizRepository.getProblem(id).then((problem) {
+      _quizStreamController.sink.add(QuizState._quizData(_currentProblem));
+    });
+  }
 }
 
 class QuizState {
@@ -68,9 +73,9 @@ class QuizState {
 
 class QuizInitState extends QuizState {}
 class QuizLoadingState extends QuizState {}
+class QuizCompleteState extends QuizState {}
 class QuizDataState extends QuizState {
   QuizDataState(this.problem);
   final Problem problem;
 }
-class QuizCompleteState extends QuizState {}
 
