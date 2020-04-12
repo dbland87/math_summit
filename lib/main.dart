@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:math_ninja/data/QuizRepository.dart';
 import 'package:math_ninja/providers/BlockProvider.dart';
 import 'package:math_ninja/ui/screens/QuizScreen.dart';
+import 'package:math_ninja/ui/screens/ReviewScreen.dart';
 
 import 'bloc/QuizBloc.dart';
 import 'ui/screens/LandingScreen.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => LandingScreen(),
           '/quiz': (context) => QuizScreen(),
+          '/review': (context) => ReviewScreen(),
         },
       ),
     );

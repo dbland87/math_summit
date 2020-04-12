@@ -1,25 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:math_ninja/bloc/QuizBloc.dart';
-import 'package:math_ninja/data/QuizRepository.dart';
 import 'package:math_ninja/providers/BlockProvider.dart';
 import 'package:math_ninja/ui/Problem/ProblemWidget.dart';
 import 'package:math_ninja/ui/keypad/KeypadWidget.dart';
 
 class QuizScreen extends StatefulWidget {
-
-
   @override
   State<StatefulWidget> createState() => _QuizScreenState();
 }
 
 class _QuizScreenState extends State<QuizScreen> {
-  QuizBloc _quizBloc;
-
   @override
   void initState() {
-//    _quizBloc = QuizBloc(widget._repository);
-//    _quizBloc.loadQuizData();
     super.initState();
   }
 
@@ -27,8 +20,11 @@ class _QuizScreenState extends State<QuizScreen> {
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<QuizBloc>(context);
 
-    //TODO
-    bloc.loadQuizData();
+    bloc.quizStream.listen((event) {
+      if (event is QuizCompleteState) {
+        Navigator.pushNamed(context, '/review');
+      }
+    });
 
     return Scaffold(
       appBar: AppBar(
@@ -43,11 +39,5 @@ class _QuizScreenState extends State<QuizScreen> {
         ],
       )),
     );
-  }
-
-  @override
-  void dispose() {
-//    _quizBloc.dispose();
-    super.dispose();
   }
 }

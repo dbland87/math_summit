@@ -6,7 +6,7 @@ class Problem {
   final int first;
   final int second;
   final Operators operator;
-  int _response = -1;
+  int _response = null;
 
   Problem({@required this.first, @required this.second, @required this.operator}):
         assert (first != null),
@@ -36,7 +36,7 @@ class Problem {
   }
 
   bool isComplete() {
-    return _response != -1;
+    return _response != null;
   }
 
   void setResponse(int response) {

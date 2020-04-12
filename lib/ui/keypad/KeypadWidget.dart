@@ -8,7 +8,7 @@ import 'NumKey.dart';
 class KeypadWidget extends StatelessWidget {
 
   final QuizBloc bloc;
-  String _currentInputValue = null;
+  String _currentInputValue = "";
 
   KeypadWidget({@required this.bloc});
 
@@ -72,6 +72,11 @@ class KeypadWidget extends StatelessWidget {
     );
   }
 
+  void clear() {
+    _currentInputValue = "";
+    bloc.onInput(null);
+  }
+
   void onNewValue(String value) {
     switch (value) {
       case "⌫":
@@ -83,11 +88,15 @@ class KeypadWidget extends StatelessWidget {
         _currentInputValue =  _currentInputValue + value;
         break;
     }
-    final int newAnswer = _currentInputValue as int;
-    bloc.onNewAnswerInput(newAnswer);
+    if (_currentInputValue != "") {
+      bloc.onInput(int.parse(_currentInputValue));
+    } else {
+      bloc.onInput(null);
+    }
   }
 
   void onNextClicked(String value) {
     bloc.onNextClicked();
+    clear();
   }
 }
