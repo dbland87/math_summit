@@ -26,7 +26,7 @@ class _QuizScreenState extends State<QuizScreen> {
   Widget build(BuildContext context) {
     _bloc.quizStream.listen((event) {
       if (event is QuizCompleteState) {
-        Navigator.pushNamed(context, '/review');
+        Navigator.popAndPushNamed(context, '/review');
       }
     });
 

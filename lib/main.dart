@@ -10,26 +10,23 @@ import 'ui/screens/LandingScreen.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-
   final QuizRepository _quizRepository = QuizRepository();
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<QuizBloc>(
-      bloc: QuizBloc(_quizRepository),
-      child: MaterialApp(
-        title: 'math_ninja',
-        theme: ThemeData(
-          primarySwatch: Colors.deepPurple,
-        ),
-        initialRoute: '/',
-        routes: {
-          '/': (context) => LandingScreen(),
-          '/quiz': (context) => QuizScreen(),
-          '/review': (context) => ReviewScreen(),
-        },
+    return MaterialApp(
+      title: 'math_ninja',
+      theme: ThemeData(
+        primarySwatch: Colors.deepPurple,
       ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => LandingScreen(),
+        '/quiz': (context) => BlocProvider<QuizBloc>(
+            bloc: QuizBloc(_quizRepository),
+            child: QuizScreen()),
+        '/review': (context) => ReviewScreen(),
+      },
     );
   }
 }
-
