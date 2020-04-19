@@ -12,7 +12,7 @@ class QuizBloc implements Bloc {
   final QuizRepository _quizRepository;
 
   final _quizStreamController = StreamController<QuizState>.broadcast();
-  final _inputStreamController = StreamController<int>();
+  final _inputStreamController = StreamController<int>.broadcast();
 
   Stream<QuizState> get quizStream => _quizStreamController.stream;
   Stream<int> get inputStream => _inputStreamController.stream;

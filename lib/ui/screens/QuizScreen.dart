@@ -12,18 +12,19 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
+
+  QuizBloc _bloc;
+
   @override
   void initState() {
     super.initState();
+    _bloc = BlocProvider.of<QuizBloc>(context);
+    _bloc.loadQuizData();
   }
 
   @override
   Widget build(BuildContext context) {
-
-    final QuizBloc bloc = BlocProvider.of<QuizBloc>(context);
-    bloc.loadQuizData();
-
-    bloc.quizStream.listen((event) {
+    _bloc.quizStream.listen((event) {
       if (event is QuizCompleteState) {
         Navigator.pushNamed(context, '/review');
       }
@@ -38,9 +39,16 @@ class _QuizScreenState extends State<QuizScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           ProblemWidget(),
-          KeypadWidget(bloc: bloc),
+          KeypadWidget(bloc: _bloc),
         ],
       )),
     );
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+
 }

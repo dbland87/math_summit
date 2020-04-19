@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:math_ninja/bloc/QuizBloc.dart';
-import 'package:math_ninja/data/Quiz.dart';
 import 'package:math_ninja/providers/BlockProvider.dart';
 import 'package:math_ninja/extensions/OperatorsExtensions.dart';
 import 'package:math_ninja/ui/Problem/ProblemCharacter.dart';
@@ -48,8 +47,6 @@ class ProblemWidget extends StatelessWidget {
   }
 
   Widget _buildError() {
-    return Center(
-      child: Text('Wat.'),
-    );
+    return Container();
   }
 }

@@ -16,7 +16,7 @@ class Quiz {
         assert(problems != null && problems.isNotEmpty);
 
   bool isComplete() {
-    return problems.any((element) => !element.isComplete());
+    return !problems.any((problem) => !problem.isComplete());
   }
 
   Problem nextUnfinishedProblem() {
