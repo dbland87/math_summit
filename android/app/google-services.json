@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "73896839409",
+    "firebase_url": "https://math-summit.firebaseio.com",
+    "project_id": "math-summit",
+    "storage_bucket": "math-summit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:73896839409:android:cac1091582720347644150",
+        "android_client_info": {
+          "package_name": "io.proxylabs.math_summit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "73896839409-i3btnh85t544vg1dtjiigik5mldq0qu8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.proxylabs.math_summit",
+            "certificate_hash": "4ca9ee405c41adaa4c35c68591347840bf6c1a3d"
+          }
+        },
+        {
+          "client_id": "73896839409-br04rp40sigijv27uehbadvfm94dtqn7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgiVussNdDonF1Nk0EG_5sDpRkYMMRayE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "73896839409-br04rp40sigijv27uehbadvfm94dtqn7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
