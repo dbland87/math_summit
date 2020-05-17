@@ -1,5 +1,5 @@
 # math_summit
 
-Math Ninja
+Math Summit
 
 ## Ash smells
