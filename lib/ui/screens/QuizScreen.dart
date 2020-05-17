@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:math_ninja/bloc/QuizBloc.dart';
-import 'package:math_ninja/providers/BlockProvider.dart';
-import 'package:math_ninja/ui/Problem/ProblemWidget.dart';
-import 'package:math_ninja/ui/keypad/KeypadWidget.dart';
+import 'package:math_summit/bloc/QuizBloc.dart';
+import 'package:math_summit/providers/BlockProvider.dart';
+import 'package:math_summit/ui/Problem/ProblemWidget.dart';
+import 'package:math_summit/ui/keypad/KeypadWidget.dart';
 
 class QuizScreen extends StatefulWidget {
 

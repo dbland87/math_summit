@@ -1,5 +1,5 @@
-import 'file:///C:/Users/COMMAND_CENTER/AndroidStudioProjects/math_ninja/lib/enums/OperatorEnum.dart';
-import 'package:math_ninja/data/Problem.dart';
+import 'file:///C:/Users/COMMAND_CENTER/AndroidStudioProjects/math_summit/lib/enums/OperatorEnum.dart';
+import 'package:math_summit/data/Problem.dart';
 import 'package:uuid/uuid.dart';
 
 import 'Quiz.dart';

@@ -1,4 +1,4 @@
-package io.proxylabs.math_ninja
+package io.proxylabs.math_summit
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:math_ninja/bloc/QuizBloc.dart';
-import 'package:math_ninja/providers/BlockProvider.dart';
-import 'package:math_ninja/extensions/StringExtensions.dart';
+import 'package:math_summit/bloc/QuizBloc.dart';
+import 'package:math_summit/providers/BlockProvider.dart';
+import 'package:math_summit/extensions/StringExtensions.dart';
 
 import 'NumKey.dart';
 

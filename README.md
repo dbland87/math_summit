@@ -1,4 +1,4 @@
-# math_ninja
+# math_summit
 
 Math Ninja
 

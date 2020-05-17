@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:math_ninja/base/Bloc.dart';
-import 'package:math_ninja/data/Problem.dart';
-import 'package:math_ninja/data/Quiz.dart';
-import 'package:math_ninja/data/QuizRepository.dart';
+import 'package:math_summit/base/Bloc.dart';
+import 'package:math_summit/data/Problem.dart';
+import 'package:math_summit/data/Quiz.dart';
+import 'package:math_summit/data/QuizRepository.dart';
 
 class QuizBloc implements Bloc {
 
