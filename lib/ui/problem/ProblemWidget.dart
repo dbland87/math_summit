@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:math_summit/bloc/QuizBloc.dart';
-import 'package:math_summit/providers/BlockProvider.dart';
-import 'package:math_summit/extensions/OperatorsExtensions.dart';
+import 'package:math_summit/bloc/quiz_bloc.dart';
+import 'package:math_summit/providers/bloc_provider.dart';
+import 'package:math_summit/extensions/operator_extensions.dart';
 import 'package:math_summit/ui/Problem/ProblemCharacter.dart';
 
 class ProblemWidget extends StatelessWidget {

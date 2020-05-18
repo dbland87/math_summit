@@ -1,5 +1,5 @@
-import 'file:///C:/Users/COMMAND_CENTER/AndroidStudioProjects/math_summit/lib/enums/OperatorEnum.dart';
-import 'package:math_summit/constants/QuizConstants.dart';
+import 'file:///C:/Users/COMMAND_CENTER/AndroidStudioProjects/math_summit/lib/enums/operator_enums.dart';
+import 'package:math_summit/constants/quiz_constants.dart';
 
 extension StringExtensions on String {
 

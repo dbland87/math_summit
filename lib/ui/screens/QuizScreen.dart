@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:math_summit/bloc/QuizBloc.dart';
-import 'package:math_summit/providers/BlockProvider.dart';
+import 'package:math_summit/bloc/quiz_bloc.dart';
+import 'package:math_summit/providers/bloc_provider.dart';
 import 'package:math_summit/ui/Problem/ProblemWidget.dart';
 import 'package:math_summit/ui/keypad/KeypadWidget.dart';
 

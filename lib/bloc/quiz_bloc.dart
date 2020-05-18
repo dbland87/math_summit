@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:math_summit/base/Bloc.dart';
-import 'package:math_summit/data/Problem.dart';
-import 'package:math_summit/data/Quiz.dart';
-import 'package:math_summit/data/QuizRepository.dart';
+import 'package:math_summit/base/bloc.dart';
+import 'package:math_summit/models/Problem.dart';
+import 'package:math_summit/models/Quiz.dart';
+import 'package:math_summit/repositories/quiz_repository.dart';
 
 class QuizBloc implements Bloc {
 
@@ -23,7 +23,7 @@ class QuizBloc implements Bloc {
 
   void loadQuizData() {
     _quizStreamController.sink.add(QuizState._quizLoading());
-    _quizRepository.getQuiz().then((quiz) {
+    _quizRepository.getQuizById("9AGQVlgTGfUnhpWd1vZp").then((quiz) {
       this._quiz = quiz;
       _quizRepository.getNextUnfinishedProblem().then((problem) {
         this._currentProblem = problem;
