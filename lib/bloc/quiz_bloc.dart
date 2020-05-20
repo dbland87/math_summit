@@ -17,19 +17,15 @@ class QuizBloc implements Bloc {
   Stream<QuizState> get quizStream => _quizStreamController.stream;
   Stream<int> get inputStream => _inputStreamController.stream;
 
-  Quiz _quiz;
   int _currentInput = null;
+  Quiz _quiz;
   Problem _currentProblem = null;
 
-  void loadQuizData() {
+  void loadQuizData() async {
     _quizStreamController.sink.add(QuizState._quizLoading());
-    _quizRepository.getQuizById("9AGQVlgTGfUnhpWd1vZp").then((quiz) {
-      this._quiz = quiz;
-      _quizRepository.getNextUnfinishedProblem().then((problem) {
-        this._currentProblem = problem;
-        _quizStreamController.sink.add(QuizState._quizData(_currentProblem));
-      });
-    });
+    _quiz = await _quizRepository.getQuizById("9AGQVlgTGfUnhpWd1vZp");
+    _currentProblem = _quiz.nextUnfinishedProblem();
+    _quizStreamController.sink.add(QuizState._quizData(_quiz, _currentProblem));
   }
 
   void onInput(int newValue) {
@@ -54,28 +50,24 @@ class QuizBloc implements Bloc {
 
   void nextProblem() {
     _currentProblem = _quiz.nextUnfinishedProblem();
-    _quizStreamController.sink.add(QuizState._quizData(_currentProblem));
-  }
-
-  void onProblemClicked(String id) {
-    _quizRepository.getProblem(id).then((problem) {
-      _quizStreamController.sink.add(QuizState._quizData(_currentProblem));
-    });
+    _quizStreamController.sink.add(QuizState._quizData(_quiz, _currentProblem));
   }
 }
 
 class QuizState {
   QuizState();
   factory QuizState._quizLoading() = QuizLoadingState;
-  factory QuizState._quizData(Problem problem) = QuizDataState;
   factory QuizState._quizComplete() = QuizCompleteState;
+  factory QuizState._quizData(Quiz quiz, Problem currentProblem) = QuizDataState;
+
 }
 
 class QuizInitState extends QuizState {}
 class QuizLoadingState extends QuizState {}
 class QuizCompleteState extends QuizState {}
 class QuizDataState extends QuizState {
-  QuizDataState(this.problem);
+  QuizDataState(this.quiz, this.problem);
+  final Quiz quiz;
   final Problem problem;
 }
 

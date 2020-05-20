@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:math_summit/bloc/quiz_bloc.dart';
 import 'package:math_summit/providers/bloc_provider.dart';
-import 'package:math_summit/extensions/operator_extensions.dart';
 import 'package:math_summit/ui/Problem/ProblemCharacter.dart';
+import 'package:math_summit/extensions/operator_extensions.dart';
 
 class ProblemWidget extends StatelessWidget {
   @override

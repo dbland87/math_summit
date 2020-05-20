@@ -1,13 +1,14 @@
-import 'file:///C:/Users/COMMAND_CENTER/AndroidStudioProjects/math_summit/lib/enums/operator_enums.dart';
 
-extension OperatorsExtensions on Operators {
+import 'package:math_summit/enums/operator.dart';
 
-    static const displaySymbols = {
-      Operators.ADD: "+",
-      Operators.SUBTRACT: "-",
-      Operators.MULTIPLY: 'x',
-      Operators.DIVIDE: '÷'
-    };
+extension OperatorExtensions on Operator {
 
-    String get displaySymbol => displaySymbols[this];
+  static const displaySymbols = {
+    Operator.ADD: "+",
+    Operator.SUBTRACT: "-",
+    Operator.MULTIPLY: 'x',
+    Operator.DIVIDE: '÷'
+  };
+
+  String get displaySymbol => displaySymbols[this];
 }

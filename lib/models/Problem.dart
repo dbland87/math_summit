@@ -1,12 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/COMMAND_CENTER/AndroidStudioProjects/math_summit/lib/enums/operator_enums.dart';
+import 'package:math_summit/enums/operator.dart';
+import 'package:math_summit/extensions/string_extensions.dart';
 
 class Problem {
   final String id;
   final int first;
   final int second;
-  final Operators operator;
+  final Operator operator;
   int _response = null;
 
   Problem(
@@ -16,34 +16,24 @@ class Problem {
         assert(second != null),
         assert(operator != null);
 
-//  factory Problem.fromFirestore(DocumentSnapshot doc) {
-//    Map data = doc.data;
-//
-//    return Problem(
-//      first: data['first'],
-//      second: data['second'],
-//      operator: data['operator']
-//    );
-//  }
-
   Problem.fromMap(Map<dynamic, dynamic> data)
       : id = "1337",
         first = data['first'],
         second = data['second'],
-        operator = Operators.MULTIPLY;
+        operator = data['operator'].toString().toOperator();
 
   int answer() {
     switch (operator) {
-      case Operators.MULTIPLY:
+      case Operator.MULTIPLY:
         return this.first * second;
         break;
-      case Operators.DIVIDE:
+      case Operator.DIVIDE:
         return first ~/ second;
         break;
-      case Operators.ADD:
+      case Operator.ADD:
         return first + second;
         break;
-      case Operators.SUBTRACT:
+      case Operator.SUBTRACT:
         return first - second;
         break;
     }

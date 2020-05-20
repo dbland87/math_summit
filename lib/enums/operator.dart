@@ -1,5 +1,5 @@
 
-enum Operators {
+enum Operator {
   MULTIPLY,
   DIVIDE,
   ADD,
